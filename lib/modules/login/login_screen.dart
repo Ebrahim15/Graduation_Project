@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LoginScreen extends StatelessWidget {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,6 +14,7 @@ class LoginScreen extends StatelessWidget {
       width: double.infinity,
       child: SingleChildScrollView(
         child: Form(
+          key: formKey,
           child: Column(
             children: [
               Padding(
@@ -42,6 +47,15 @@ class LoginScreen extends StatelessWidget {
                     ),
                     contentPadding: EdgeInsets.fromLTRB(30, 13, 0, 13),
                   ),
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value?.isEmpty == true) {
+                      return "Email cannot be empty";
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
               ),
               SizedBox(
@@ -50,26 +64,35 @@ class LoginScreen extends StatelessWidget {
               Container(
                 width: 350,
                 child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: HexColor('#00A429'),
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                          color: HexColor('#00A429'),
+                        ),
                       ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: HexColor('#00A429'),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                          color: HexColor('#00A429'),
+                        ),
                       ),
+                      hintText: "Password",
+                      hintStyle: TextStyle(
+                        color: HexColor("#87888F"),
+                      ),
+                      contentPadding: EdgeInsets.fromLTRB(30, 13, 0, 13),
                     ),
-                    hintText: "Password",
-                    hintStyle: TextStyle(
-                      color: HexColor("#87888F"),
-                    ),
-                    contentPadding: EdgeInsets.fromLTRB(30, 13, 0, 13),
-                  ),
-                ),
+                    controller: passwordController,
+                    obscureText: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    validator: (value) {
+                      if (value?.isEmpty == true) {
+                        return "Password cannot be empty";
+                      } else {
+                        return null;
+                      }
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(65, 0, 0, 0),
@@ -101,7 +124,11 @@ class LoginScreen extends StatelessWidget {
                   color: HexColor("#00A429"),
                 ),
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(formKey.currentState?.validate() == true){
+                      print("Validated");
+                    }
+                  },
                   child: Text(
                     "Login",
                     style: TextStyle(
