@@ -30,6 +30,18 @@ Widget defaultTextFormField({
             color: HexColor("#87888F"),
           ),
           contentPadding: EdgeInsets.fromLTRB(30, 13, 0, 13),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              color: HexColor('#00A429'),
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              color: HexColor('#00A429'),
+            ),
+          ),
         ),
         controller: textController,
         keyboardType: keyboardType,

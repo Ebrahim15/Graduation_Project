@@ -38,7 +38,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Form(
           key: formKey,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
             child: Column(
               children: [
                 defaultTextFormField(
@@ -133,6 +133,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
@@ -155,23 +156,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(5, 2, 0, 0),
                           child:
-                            Text(
-                              "I agree with the Terms of Service & Privacy Policy",
-                              style: TextStyle(
-                                fontSize: 13,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "I agree with the Terms of Service & Privacy Policy",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                  child: Text(
+                                    errorText,
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 11,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                       ),
                     ],
-                  ),
-                ),
-                Text(
-                  errorText,
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 11,
                   ),
                 ),
                 SizedBox(
