@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/shared/components/components.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -25,74 +26,33 @@ class LoginScreen extends StatelessWidget {
                   width: 239,
                 ),
               ),
-              Container(
-                width: 350,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: HexColor('#00A429'),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: HexColor('#00A429'),
-                      ),
-                    ),
-                    hintText: "Email",
-                    hintStyle: TextStyle(
-                      color: HexColor("#87888F"),
-                    ),
-                    contentPadding: EdgeInsets.fromLTRB(30, 13, 0, 13),
-                  ),
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value?.isEmpty == true) {
-                      return "Email cannot be empty";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
+              defaultTextFormField(
+                textController: emailController,
+                hintText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value?.isEmpty == true) {
+                    return "Email cannot be empty";
+                  } else {
+                    return null;
+                  }
+                },
               ),
               SizedBox(
                 height: 18.0,
               ),
-              Container(
-                width: 350,
-                child: TextFormField(
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: HexColor('#00A429'),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                          color: HexColor('#00A429'),
-                        ),
-                      ),
-                      hintText: "Password",
-                      hintStyle: TextStyle(
-                        color: HexColor("#87888F"),
-                      ),
-                      contentPadding: EdgeInsets.fromLTRB(30, 13, 0, 13),
-                    ),
-                    controller: passwordController,
-                    obscureText: true,
-                    keyboardType: TextInputType.visiblePassword,
-                    validator: (value) {
-                      if (value?.isEmpty == true) {
-                        return "Password cannot be empty";
-                      } else {
-                        return null;
-                      }
-                    }),
+              defaultTextFormField(
+                textController: passwordController,
+                hintText: "Passsword",
+                keyboardType: TextInputType.visiblePassword,
+                validator: (value) {
+                  if (value?.isEmpty == true) {
+                    return "Password cannot be empty";
+                  } else {
+                    return null;
+                  }
+                },
+                isPassword: true,
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(65, 0, 0, 0),
@@ -116,27 +76,35 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 50.0,
               ),
-              Container(
-                width: 155,
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: HexColor("#00A429"),
-                ),
-                child: MaterialButton(
+              // Container(
+              //   width: 155,
+              //   height: 55,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(10),
+              //     color: HexColor("#00A429"),
+              //   ),
+              //   child: MaterialButton(
+              //     onPressed: () {
+              //       if (formKey.currentState?.validate() == true) {
+              //         print("Validated");
+              //       }
+              //     },
+              //     child: Text(
+              //       "Login",
+              //       style: TextStyle(
+              //         color: Colors.white,
+              //         fontSize: 20,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              defaultLogInOutButton(
+                  buttonText: 'Login',
                   onPressed: () {
-                    if(formKey.currentState?.validate() == true){
+                    if (formKey.currentState?.validate() == true) {
                       print("Validated");
                     }
                   },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
               ),
               SizedBox(
                 height: 80.0,
