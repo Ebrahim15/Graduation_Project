@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
+import 'package:graduation_project/modules/registration/registration_screen.dart';
 
 class AppLayout extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class AppLayout extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: LoginScreen(),
+      body: RegistrationScreen(),
     );
   }
 }
