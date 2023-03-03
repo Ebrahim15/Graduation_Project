@@ -37,6 +37,13 @@
             {
               "client_id": "348458736836-i9aojjcqnfa37hpfobsp0qq4omo465f2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "348458736836-5r6tu6vblisrs0g14h6nc9u6k19prkpc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.graduationProject"
+              }
             }
           ]
         }
