@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,19 +19,14 @@ class LoginCubit extends Cubit<LoginStates> {
     required String password,
   }) {
     emit(LoginLoadingState());
-
-    DioHelper.postData(
-      url: LOGIN,
-      data: {
-        "email": email,
-        "password": password,
-      },
-    ).then((value) {
-      print(value.data);
+    
+    FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+    ).then((value){
       emit(LoginSuccessState());
     }).catchError((error){
-      // print("Error is: ${error.toString()}");
-      emit(LoginErrorState(error));
+      emit(LoginErrorState(error.toString()));
     });
   }
 
