@@ -49,13 +49,65 @@ Widget defaultTextFormField({
         obscureText: isPassword,
       ),
     );
+Widget profileItem({
+    required String itemName,
+    required String itemcontent,
+})=>Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Text(
+      itemName,
+      style: TextStyle(
+        fontWeight:FontWeight.bold,
+        color: Color(0xFF87888f),
+      ),
+    ),
+    Text(
+      itemcontent,
+      style: TextStyle(
+        fontSize:20 ,
+        color: Colors.black,
+      ),
+    ),
+    Container(
+      width: 250,
+      height: 1.0,
+      color:Color(0xFFcacdcb),
+    ),
+  ],
+);
+
+Widget defaultNavigator({
+  required String navtext,
+  required VoidCallback onPresed,
+})=> Padding(
+  padding: const EdgeInsets.all(20.0),
+  child: Row(
+//mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: [
+      Text(navtext,
+        style: TextStyle(
+          fontSize: 15.0,
+          color: Colors.black,
+        ),
+      ),
+      Spacer(),
+      IconButton(
+        onPressed: onPresed,
+        icon: Icon(Icons.arrow_forward_ios),
+      ),
+    ],
+  ),
+);
 
 Widget defaultLogInOutButton({
   required String buttonText,
   required VoidCallback? onPressed,
+  double? wid=155,
+  double? high=55,
 }) => Container(
-      width: 155,
-      height: 55,
+      width: wid,
+      height: high,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: HexColor("#00A429"),

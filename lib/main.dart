@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
+import 'package:graduation_project/modules/home-page/home-layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // home:BottomNavBar(),
       home: AppLayout(),
     );
   }
