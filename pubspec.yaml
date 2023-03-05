@@ -38,6 +38,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   hexcolor: ^3.0.1
   roundcheckbox: ^2.0.5
+  bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
+  dio: ^5.0.0
+  conditional_builder_null_safety: ^0.0.6
+  fluttertoast: ^8.2.1
+
+  #firebase
+  firebase_core: ^2.7.0
+  firebase_auth: ^4.2.9
+  cloud_firestore: ^4.4.3
 
 dev_dependencies:
   flutter_test:
