@@ -12,7 +12,7 @@ class AppLayout extends StatelessWidget {
       //   backgroundColor: Colors.white,
       //   elevation: 0,
       // ),
-      body: LoginScreen(),
+      body: LoginScreen( ),
     );
   }
 }
