@@ -9,6 +9,7 @@ import '../../modules/settings/settings_screen.dart';
 class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     List<Widget> _buildScreens() {
       return [
         HomeScreen(),
@@ -71,6 +72,7 @@ class AppLayout extends StatelessWidget {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style1, // Choose the nav bar style with this property.
+
 
     );
   }
