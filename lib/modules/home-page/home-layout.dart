@@ -1,83 +1,16 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/modules/controler/controler-screen.dart';
 import 'package:graduation_project/modules/settings/settings_screen.dart';
 import 'package:graduation_project/shared/components/components.dart';
+
 import 'package:flutter/services.dart';
-//import 'package:graduation_project/modules/profile/profile_screen.dart';
-//import 'package:graduation_project/modules/settings/settings_screen.dart';
-//import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-// class BottomNavBar extends StatelessWidget {
-  //const ({Key? key}) : super(key: key);
+import 'package:graduation_project/shared/cubit/cubit.dart';
+import 'package:hexcolor/hexcolor.dart';
 
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     List<Widget> _buildScreens() {
-//       return [
-//         HomeScreen(),
-//         Settings(),
-//         Profile(),
-//         // MainScreen(),
-//         // SettingsScreen()
-//       ];
-//     }
-//     List<PersistentBottomNavBarItem> _navBarsItems() {
-//       return [
-//         PersistentBottomNavBarItem(
-//           icon: const Icon(Icons.home_outlined),
-//           title: ("Home"),
-//           activeColorPrimary:Colors.green,
-//           inactiveColorPrimary: Colors.grey,
-//         ),
-//         PersistentBottomNavBarItem(
-//           icon: const Icon(Icons.account_circle),
-//           title: ("profile"),
-//           activeColorPrimary:Colors.green,
-//           inactiveColorPrimary: Colors.grey,
-//         ),
-//         PersistentBottomNavBarItem(
-//           icon: const Icon(Icons.settings_outlined),
-//           title: ("Settings"),
-//           activeColorPrimary:Colors.green,
-//           inactiveColorPrimary: Colors.grey,
-//         ),
-//       ];
-//     }
-//     PersistentTabController _controller;
-//
-//     _controller = PersistentTabController(initialIndex: 0);
-//
-//     return PersistentTabView(
-//       context,
-//       controller: _controller,
-//       screens: _buildScreens(),
-//       items: _navBarsItems(),
-//       confineInSafeArea: true,
-//       backgroundColor: Colors.white, // Default is Colors.white.
-//       handleAndroidBackButtonPress: true, // Default is true.
-//       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-//       stateManagement: true, // Default is true.
-//       hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-//       decoration: NavBarDecoration(
-//         borderRadius: BorderRadius.circular(10.0),
-//         colorBehindNavBar: Colors.white,
-//       ),
-//       popAllScreensOnTapOfSelectedTab: true,
-//       popActionScreens: PopActionScreensType.all,
-//       itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
-//         duration: Duration(milliseconds: 200),
-//         curve: Curves.ease,
-//       ),
-//       screenTransitionAnimation: const ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-//         animateTabTransition: true,
-//         curve: Curves.ease,
-//         duration: Duration(milliseconds: 200),
-//       ),
-//       navBarStyle: NavBarStyle.style1, // Choose the nav bar style with this property.
-//     );;
-//   }
-// }
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -87,6 +20,7 @@ class HomeScreen extends StatelessWidget {
    Size size=MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
+
         children: [
           Container(
             height: size.height*0.3,

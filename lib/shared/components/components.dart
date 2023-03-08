@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:graduation_project/shared/styles/colors.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 Widget defaultTextFormField({
@@ -10,6 +11,8 @@ Widget defaultTextFormField({
   required String? Function(String?)? validator,
   Function(String value)? onSubmit,
   bool isPassword = false,
+  IconData? suffix,
+  VoidCallback? suffixPressed,
 }) =>
     Container(
       width: 350,
@@ -44,6 +47,14 @@ Widget defaultTextFormField({
               color: HexColor('#00A429'),
             ),
           ),
+          suffixIcon: suffix != null
+              ? IconButton(
+            icon: Icon(
+              suffix,
+            ),
+            onPressed: suffixPressed,
+          )
+              : null,
         ),
         controller: textController,
         keyboardType: keyboardType,
@@ -238,5 +249,22 @@ color = Colors.amber;
 break;
 }
 
-return color;
+  return color;
 }
+
+void navigateRootAndFinish(context, widget) => Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(
+    builder: (context) => widget,
+  ), (route) => false);
+
+Widget defaultTextButton(
+    {required String text, required VoidCallback onPressed}) =>
+    TextButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: TextStyle(
+          color: HexColor(defaultColor),
+        ),
+      ),
+    );
+

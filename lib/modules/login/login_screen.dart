@@ -3,11 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:graduation_project/layout/app_layout/app_layout.dart';
+import 'package:graduation_project/modules/home-page/home-layout.dart';
 import 'package:graduation_project/shared/components/components.dart';
 import 'package:graduation_project/modules/login/cubit/cubit.dart';
+import 'package:graduation_project/shared/network/local/cache_helper.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import '../home/home_screen.dart';
 import '../registration/registration_screen.dart';
 import 'cubit/states.dart';
 
@@ -23,9 +25,17 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginErrorState) {
+            print("Login Error: ${state.error}");
             showToast(errorMessage: state.error, state: ToastStates.ERROR);
-          } else if (state is LoginSuccessState) {
-            navigateAndFinish(context, HomeScreen());
+          }
+          else if (state is LoginSuccessState) {
+            LoginCubit.get(context).saveLoginData(uId: state.uId, context: context);
+            // CacheHelper.saveData(
+            //   key: 'uId',
+            //   value: state.uId,
+            // ).then((value){
+            //   navigateAndFinish(context, AppLayout());
+            // });
           }
         },
         builder: (context, state) {
@@ -78,14 +88,22 @@ class LoginScreen extends StatelessWidget {
                                 password: passwordController.text);
                           }
                         },
+                        suffix: LoginCubit.get(context).suffix,
+                        suffixPressed: (){
+                          LoginCubit.get(context).changePasswordVisibility();
+                        },
                         validator: (value) {
                           if (value?.isEmpty == true) {
                             return "Password cannot be empty";
-                          } else {
+                          }
+                          else if(value!.length < 6){
+                            return "Password is too short";
+                          }
+                          else {
                             return null;
                           }
                         },
-                        isPassword: true,
+                        isPassword: LoginCubit.get(context).isPassword,
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(65, 0, 0, 0),
@@ -109,37 +127,16 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 50.0,
                       ),
-                      // Container(
-                      //   width: 155,
-                      //   height: 55,
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     color: HexColor("#00A429"),
-                      //   ),
-                      //   child: MaterialButton(
-                      //     onPressed: () {
-                      //       if (formKey.currentState?.validate() == true) {
-                      //         print("Validated");
-                      //       }
-                      //     },
-                      //     child: Text(
-                      //       "Login",
-                      //       style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: 20,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                       ConditionalBuilder(
-                        condition: state is! LoginLoadingState,
+                        condition: state is! LoginLoadingState && state is! SaveLoginDataLoading,
                         builder: (context) => defaultLogInOutButton(
                           buttonText: 'Login',
                           onPressed: () {
                             if (formKey.currentState?.validate() == true) {
                               LoginCubit.get(context).userLogin(
                                   email: emailController.text,
-                                  password: passwordController.text);
+                                  password: passwordController.text,
+                              );
                             }
                           },
                         ),
@@ -150,17 +147,6 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // defaultLogInOutButton(
-                      //   buttonText: 'Login',
-                      //   onPressed: () {
-                      //     if (formKey.currentState?.validate() == true) {
-                      //       LoginCubit.get(context).userLogin(
-                      //           email: emailController.text,
-                      //           password: passwordController.text
-                      //       );
-                      //     }
-                      //   },
-                      // ),
                       SizedBox(
                         height: 80.0,
                       ),
