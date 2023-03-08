@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
+import 'package:graduation_project/shared/constants/constants.dart';
 
 import '../../shared/components/components.dart';
 
@@ -137,14 +138,7 @@ class Profile extends StatelessWidget {
              lineItem(),
              GestureDetector (
                onTap: (){
-                 Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-                   MaterialPageRoute(
-                     builder: (BuildContext context) {
-                       return LoginScreen();
-                     },
-                   ),
-                       (_) => false,
-                 );
+
                  },
              child: Padding(
                padding: const EdgeInsets.all(20.0),
@@ -168,14 +162,7 @@ class Profile extends StatelessWidget {
               ),
              GestureDetector (
                onTap: (){
-                 Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-                   MaterialPageRoute(
-                     builder: (BuildContext context) {
-                       return LoginScreen();
-                     },
-                   ),
-                       (_) => false,
-                 );
+                 signOut(context);
                },
                child: Padding(
                  padding: const EdgeInsets.all(20.0),

@@ -32,7 +32,6 @@ void main() async {
   );
 
   Bloc.observer = MyBlocObserver();
-  runApp(const MyApp());
 
 
   await CacheHelper.init();
