@@ -1,11 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/layout/app_layout/app_layout.dart';
+import 'package:graduation_project/shared/components/components.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../shared/styles/colors.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  final Widget startWidget;
+  SplashScreen({Key? key, required this.startWidget}) : super(key: key);
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    navigateToStartWidget();
+  }
+  navigateToStartWidget() async {
+    await Future.delayed(Duration(milliseconds: 3000), (){});
+    navigateAndFinish(context, widget.startWidget);
+  }
   @override
   Widget build(BuildContext context) {
      return Scaffold(
