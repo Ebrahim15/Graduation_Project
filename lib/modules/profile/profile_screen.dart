@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/modules/login/login_screen.dart';
 
 import '../../shared/components/components.dart';
 
@@ -212,7 +213,6 @@ class Profile extends StatelessWidget {
                  ),
                ],
              ),
-
            ],
          ),
 

@@ -1,11 +1,16 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/modules/settings/settings_screen.dart';
+import 'package:graduation_project/shared/components/components.dart';
+import 'package:graduation_project/shared/cubit/cubit.dart';
+import 'package:hexcolor/hexcolor.dart';
 //import 'package:graduation_project/modules/profile/profile_screen.dart';
 //import 'package:graduation_project/modules/settings/settings_screen.dart';
 //import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 // class BottomNavBar extends StatelessWidget {
-  //const ({Key? key}) : super(key: key);
+//const ({Key? key}) : super(key: key);
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -85,158 +90,213 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector (
-                onTap: (){Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>Settings()));},
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        'Start Mowing',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF00A429),
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
+        children: [
+          ConditionalBuilder(
+              condition: FirebaseAuth.instance.currentUser?.emailVerified == false,
+              builder: (context) => Container(
+                color: Colors.amber.withOpacity(.6),
+                height: 50.0,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                      ),
+                      SizedBox(
+                        width: 15.0,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "please verify your email",
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Container(
-                        height: 130,
-                        width: 130,
-                        color:Colors.white,
-                        child:Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Image.asset('assets/images/grass_cutter3.jpeg'),
-                        ),
+                      SizedBox(
+                        width: 20.0,
                       ),
-                    ),
-                  ],
+                      TextButton(
+                        child: Text(
+                          "SEND",
+                          style: TextStyle(
+                            color: HexColor('#00A429'),
+                          ),
+                        ),
+                        onPressed: () {
+                          FirebaseAuth.instance.currentUser
+                              ?.sendEmailVerification()
+                              .then((value) {
+                            showToast(
+                                errorMessage: 'check your email',
+                                state: ToastStates.SUCCESS);
+                          }).catchError((error) {});
+                        },
+                      )
+                    ],
+                  ),
                 ),
+              ),
+              fallback: (context) => Container(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Settings()));
+              },
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Start Mowing',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF00A429),
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset('assets/images/grass_cutter3.jpeg'),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: GestureDetector (
-                  onTap: (){Navigator.push(context, MaterialPageRoute(
-                      builder: (context)=>HomeScreen()));},
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Container(
-                          height: 130,
-                          width: 130,
-                          color:Colors.white,
-                          child:Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset('assets/images/soil1.png'),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      const Expanded(
-                        child: Text(
-                          'Soil Readings',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF00A429),
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: GestureDetector (
-                  onTap: (){Navigator.push(context, MaterialPageRoute(
-                      builder: (context)=>HomeScreen()));},
-                  child: Row(
-                    children: [
-                      const Expanded(
-                        child: Text(
-                          'About us',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF00A429),
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Container(
-                          height: 130,
-                          width: 130,
-                          color:Colors.white,
-                          child:Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset('assets/images/aboutus1.png'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: GestureDetector (
-                  onTap: (){Navigator.push(context, MaterialPageRoute(
-                      builder: (context)=>HomeScreen()));},
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Container(
-                          height: 130,
-                          width: 130,
-                          color:Colors.white,
-                          child:Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset('assets/images/feedback2.png'),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                       Expanded(
-                        child: Text(
-                          'Tell us your Feedback',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF00A429),
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
           ),
-      );
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset('assets/images/soil1.png'),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Soil Readings',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF00A429),
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'About us',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF00A429),
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset('assets/images/aboutus1.png'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset('assets/images/feedback2.png'),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Text(
+                      'Tell us your Feedback',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF00A429),
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
-

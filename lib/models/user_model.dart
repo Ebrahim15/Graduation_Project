@@ -6,20 +6,23 @@ class UserModel
   late String email;
   late String phone;
   late String? uId;
+  late bool isEmailVerified;
 
   UserModel({
     required this.email,
     required this.name,
     required this.phone,
     required this.uId,
-});
+    required this.isEmailVerified,
+  });
 
-  UserModel.fromJson(Map<String, dynamic> json)
+  UserModel.fromJson(Map<String, dynamic>? json)
   {
-    email = json['email'];
-    name = json['name'];
-    phone = json['phone'];
-    uId = json['uId'];
+    email = json?['email'];
+    name = json?['name'];
+    phone = json?['phone'];
+    uId = json?['uId'];
+    isEmailVerified = json?['isEmailVerified'];
   }
 
   Map<String, dynamic> toMap(){
@@ -28,6 +31,7 @@ class UserModel
       'email':email,
       'phone':phone,
       'uId':uId,
+      'isEmailVerified':isEmailVerified,
     };
   }
 }

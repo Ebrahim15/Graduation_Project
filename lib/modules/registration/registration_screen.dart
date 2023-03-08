@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project/modules/home/home_screen.dart';
+import 'package:graduation_project/layout/app_layout/app_layout.dart';
 import 'package:graduation_project/modules/login/cubit/cubit.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
 import 'package:graduation_project/modules/registration/cubit/states.dart';
@@ -44,7 +44,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {
           if(state is CreateUserSuccessState){
-            navigateAndFinish(context, HomeScreen());
+            navigateAndFinish(context, AppLayout());
+          }
+          if(state is RegisterErrorState)
+            {
+              showToast(errorMessage: state.error, state: ToastStates.ERROR);
+            }
+          if(state is RegisterSuccessState){
+            RegisterCubit.get(context).saveRegisterData(uId: state.uId);
           }
         },
         builder: (context, state) {
@@ -61,7 +68,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: Form(
                   key: formKey,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 55.0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 75.0, 0, 0),
                     child: Column(
                       children: [
                         defaultTextFormField(
@@ -84,9 +91,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           hintText: "Email",
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
+                            List<String> mail = [
+                              "gmail",
+                              "hotmail",
+                              "outlook",
+                              "yahoo"
+                            ];
                             if (value?.isEmpty == true) {
                               return "Email cannot be empty";
-                            } else {
+                            }
+                            else if(
+                                value?.substring(value.indexOf("@")+1) != "gmail.com" &&
+                                value?.substring(value.indexOf("@")+1) != "yahoo.com" &&
+                                value?.substring(value.indexOf("@")+1) != "outlook.com" &&
+                                value?.substring(value.indexOf("@")+1) != "hotmail.com"
+                            ){
+                              showToast(errorMessage: "Email address is invalid.", state: ToastStates.ERROR);
+                              return "Invalid email address";
+                            }
+                            else {
+                              print("Email: ${value?.substring(value.indexOf("@")+1)}");
                               return null;
                             }
                           },
@@ -106,36 +130,44 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             }
                           },
                         ),
-                        SizedBox(
-                          height: 18.0,
-                        ),
-                        defaultTextFormField(
-                          textController: addressController,
-                          hintText: "Address",
-                          keyboardType: TextInputType.streetAddress,
-                          validator: (value) {
-                            if (value?.isEmpty == true) {
-                              return "Address cannot be empty";
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
+                        // SizedBox(
+                        //   height: 18.0,
+                        // ),
+                        // defaultTextFormField(
+                        //   textController: addressController,
+                        //   hintText: "Address",
+                        //   keyboardType: TextInputType.streetAddress,
+                        //   validator: (value) {
+                        //     if (value?.isEmpty == true) {
+                        //       return "Address cannot be empty";
+                        //     } else {
+                        //       return null;
+                        //     }
+                        //   },
+                        // ),
                         SizedBox(
                           height: 18.0,
                         ),
                         defaultTextFormField(
                           textController: passwordController,
                           hintText: "Password",
+                          suffix: RegisterCubit.get(context).suffix,
+                          suffixPressed: (){
+                            RegisterCubit.get(context).changePasswordVisibility();
+                          },
                           keyboardType: TextInputType.visiblePassword,
                           validator: (value) {
                             if (value?.isEmpty == true) {
                               return "Password cannot be empty";
-                            } else {
+                            }
+                            else if(value!.length < 6){
+                              return "Password is too short";
+                            }
+                            else {
                               return null;
                             }
                           },
-                          isPassword: true,
+                          isPassword: RegisterCubit.get(context).isPassword,
                         ),
                         SizedBox(
                           height: 18.0,
