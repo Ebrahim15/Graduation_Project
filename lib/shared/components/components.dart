@@ -63,125 +63,191 @@ Widget defaultTextFormField({
         onFieldSubmitted: onSubmit,
       ),
     );
+
 Widget profileItem({
-    required String itemName,
-    required String itemcontent,
-})=>Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-    Text(
-      itemName,
-      style: TextStyle(
-        fontWeight:FontWeight.bold,
-        color: Color(0xFF87888f),
-      ),
-    ),
-    Text(
-      itemcontent,
-      style: TextStyle(
-        fontSize:20 ,
-        color: Colors.black,
-      ),
-    ),
+  required String itemName,
+  required String itemcontent,
+}) =>
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          itemName,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF87888f),
+          ),
+        ),
+        Text(
+          itemcontent,
+          maxLines: 2,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+          ),
+        ),
+        Container(
+          width: 250,
+          height: 1.0,
+          color: Color(0xFFcacdcb),
+        ),
+      ],
+    );
+
+Widget lineItem({
+  double width = 350,
+  double height = 1,
+}) =>
     Container(
-      width: 250,
-      height: 1.0,
-      color:Color(0xFFcacdcb),
-    ),
-  ],
-);
+      width: width,
+      height: height,
+      color: Color(0xFFcacdcb),
+    );
 
 Widget defaultNavigator({
   required String navtext,
   required VoidCallback onPresed,
-})=> Padding(
-  padding: const EdgeInsets.all(20.0),
-  child: Row(
-//mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      Text(navtext,
-        style: TextStyle(
-          fontSize: 15.0,
-          color: Colors.black,
-        ),
+}) =>
+    Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10,),
+      child: Row(
+//m+inAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(navtext,
+            style: TextStyle(
+              fontSize: 15.0,
+              color: Colors.black,
+            ),
+          ),
+          Spacer(),
+          IconButton(
+            onPressed: onPresed,
+            icon: Icon(Icons.arrow_forward_ios),
+          ),
+        ],
       ),
-      Spacer(),
-      IconButton(
-        onPressed: onPresed,
-        icon: Icon(Icons.arrow_forward_ios),
-      ),
-    ],
-  ),
-);
+    );
 
-Widget defaultLogInOutButton({
-  required String buttonText,
-  required VoidCallback? onPressed,
-  double? wid=155,
-  double? high=55,
-}) => Container(
-      width: wid,
-      height: high,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: HexColor("#00A429"),
+Widget homeCard
+    ({
+  required String cardMasage,
+  required String cardImage,
+  required VoidCallback ontap,
+  double?  contWid=150,
+  double? contHigh=150,
+  double?  imgWid=100,
+  double? imgHigh=100,
+  double? boxSz=10,
+}) =>
+    Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)
       ),
-      child: MaterialButton(
-        onPressed: onPressed,
-        child: Text(
-          buttonText,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
+      elevation: 0.2,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20.0),
+        splashColor: Colors.green.withAlpha(30),
+        onTap: ontap,
+        child: Container(
+          width:150 ,
+          height:150 ,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children:[
+                Expanded(
+                  child: Image(
+                    image:AssetImage(cardImage),
+                    height: imgHigh,
+                    width: imgWid,
+                  ),
+                ),
+                SizedBox(
+                  height: boxSz,
+                ),
+                Text(cardMasage,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Color(0xFF00A429),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
 
+Widget defaultLogInOutButton({
+required String buttonText,
+required VoidCallback? onPressed,
+double? wid=155,
+double? high=55,
+}) => Container(
+width: wid,
+height: high,
+decoration: BoxDecoration(
+borderRadius: BorderRadius.circular(10),
+color: HexColor("#00A429"),
+),
+child: MaterialButton(
+onPressed: onPressed,
+child: Text(
+buttonText,
+style: TextStyle(
+color: Colors.white,
+fontSize: 20,
+),
+),
+),
+);
+
 void navigateTo(context, widget) => Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => widget,
-  ),
+context,
+MaterialPageRoute(
+builder: (context) => widget,
+),
 );
 
 void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
-  context,
-  MaterialPageRoute(
-    builder: (context) => widget,
-  ),
-      (route) => false,
+context,
+MaterialPageRoute(
+builder: (context) => widget,
+),
+(route) => false,
 );
 
 void showToast({
-  required String errorMessage,
-  required ToastStates state
+required String errorMessage,
+required ToastStates state
 }) => Fluttertoast.showToast(
-    msg: errorMessage,
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 5,
-    backgroundColor: chooseToastColor(state),
-    textColor: Colors.white,
-    fontSize: 16.0
+msg: errorMessage,
+toastLength: Toast.LENGTH_LONG,
+gravity: ToastGravity.BOTTOM,
+timeInSecForIosWeb: 5,
+backgroundColor: chooseToastColor(state),
+textColor: Colors.white,
+fontSize: 16.0
 );
 
 enum ToastStates {SUCCESS, ERROR, WARNING}
 
 Color chooseToastColor(ToastStates state) {
-  Color color;
+Color color;
 
-  switch (state) {
-    case ToastStates.SUCCESS:
-      color = Colors.green;
-      break;
-    case ToastStates.ERROR:
-      color = Colors.red;
-      break;
-    case ToastStates.WARNING:
-      color = Colors.amber;
-      break;
-  }
+switch (state) {
+case ToastStates.SUCCESS:
+color = Colors.green;
+break;
+case ToastStates.ERROR:
+color = Colors.red;
+break;
+case ToastStates.WARNING:
+color = Colors.amber;
+break;
+}
 
   return color;
 }
@@ -201,3 +267,4 @@ Widget defaultTextButton(
         ),
       ),
     );
+

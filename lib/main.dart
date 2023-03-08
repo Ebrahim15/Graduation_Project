@@ -24,12 +24,16 @@ import 'package:graduation_project/shared/styles/colors.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'firebase_options.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  Bloc.observer = MyBlocObserver();
+  runApp(const MyApp());
+
 
   await CacheHelper.init();
 
@@ -56,7 +60,9 @@ void main() async {
   runApp(MyApp(
     startWidget: widget,
   ));
+
 }
+
 
 class MyApp extends StatelessWidget {
   final Widget startWidget;

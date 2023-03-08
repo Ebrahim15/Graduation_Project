@@ -25,11 +25,7 @@ class Profile extends StatelessWidget {
      ) ,
      body: Column(
        children: [
-         Container(
-           width: 300,
-           height: 1.0,
-           color:Color(0xFFcacdcb),
-         ),
+        lineItem(),
          Padding(
            padding: const EdgeInsets.all(20.0),
            child: Row(
@@ -45,16 +41,6 @@ class Profile extends StatelessWidget {
                  child: Column(
                    children: [
                      Text(
-                       'khaled,hashim23@gmail.com',
-                       maxLines: 1,
-                       overflow:TextOverflow.ellipsis ,
-                       style: TextStyle(
-                         fontWeight: FontWeight.bold,
-                         fontSize: 16,
-                         color: Color(0xFF667069),
-                       ),
-                     ),
-                     Text(
                        'Khaled.M.H',
                        maxLines: 2,
                        overflow:TextOverflow.ellipsis ,
@@ -62,6 +48,16 @@ class Profile extends StatelessWidget {
                          fontWeight: FontWeight.bold,
                          fontSize: 16,
                          color: Color(0xFF474747),
+                       ),
+                     ),
+                     Text(
+                       'khaled.hashim23@gmail.com',
+                       maxLines: 1,
+                       overflow:TextOverflow.ellipsis ,
+                       style: TextStyle(
+                         fontWeight: FontWeight.bold,
+                         fontSize: 16,
+                         color: Color(0xFF667069),
                        ),
                      ),
                      SizedBox(
@@ -76,6 +72,7 @@ class Profile extends StatelessWidget {
                    ],
                  ),
                ),
+
                // Stack(
                //   alignment: AlignmentDirectional.bottomEnd,
                //   children: const [
@@ -101,121 +98,109 @@ class Profile extends StatelessWidget {
          SizedBox(
            height: 20.0,
          ),
+         Center(
+           child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
+               profileItem(
+                   itemName: 'Name',
+                   itemcontent: 'Khaled mohamed abou hashim',
+               ),
+               SizedBox(
+                 height: 20.0,
+               ),
+              profileItem(
+                  itemName: 'Email',
+                  itemcontent: 'Khaled.hashim23@gmail.com',
+              ),
+               SizedBox(
+                 height: 20.0,
+               ),
+               profileItem(
+                   itemName: 'Phone',
+                   itemcontent: '01097010260',
+               ),
+               SizedBox(
+                 height: 20.0,
+               ),
+               profileItem(
+                   itemName: 'Address',
+                   itemcontent: 'building-9 , salah_salem ',
+               ),
+             ],
+           ),
+         ),
+         Spacer(
+         ),
          Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
            children: [
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(
-                   'Name',
-                   style: TextStyle(
-                     fontWeight:FontWeight.bold,
-                     color: Color(0xFF87888f),
+             lineItem(),
+             GestureDetector (
+               onTap: (){
+                 Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                   MaterialPageRoute(
+                     builder: (BuildContext context) {
+                       return LoginScreen();
+                     },
+                   ),
+                       (_) => false,
+                 );
+                 },
+             child: Padding(
+               padding: const EdgeInsets.all(20.0),
+               child: Row(
+                 children: const [
+                  Icon(
+                    Icons.key_rounded,
+                    size: 35,
+                    color:Color(0xFF063c14) ,
+                  ),
+                   SizedBox(width: 20,),
+                   Text(
+                       'Change Password',
+                     style: TextStyle(
+                       fontSize: 18
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+              ),
+             GestureDetector (
+               onTap: (){
+                 Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                   MaterialPageRoute(
+                     builder: (BuildContext context) {
+                       return LoginScreen();
+                     },
+                   ),
+                       (_) => false,
+                 );
+               },
+               child: Padding(
+                 padding: const EdgeInsets.all(20.0),
+                 child: Row(
+                   children: [
+                     Icon(
+                       Icons.logout_rounded,
+                       size: 35,
+                       color:Color(0xFFaa170d) ,
+                     ),
+                     SizedBox(width: 20,),
+                     Text(
+                       'Log Out',
+                       style: TextStyle(
+                           fontSize: 18
+                       ),
 
-                   ),
+                     ),
+                   ],
                  ),
-                 Text(
-                   'khaled mohamed abou hashim',
-                   style: TextStyle(
-                     fontSize:20 ,
-                     color: Colors.black,
-                   ),
-                 ),
-                 Container(
-                   width: 250,
-                   height: 1.0,
-                   color:Color(0xFFcacdcb),
-                 ),
-               ],
-             ),
-             SizedBox(
-               height: 20.0,
-             ),
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(
-                   'Email',
-                   style: TextStyle(
-                     fontWeight:FontWeight.bold,
-                     color: Color(0xFF87888f),
-
-                   ),
-                 ),
-                 Text(
-                   'khale.hashim23@gmail.com',
-                   style: TextStyle(
-                     fontSize:20 ,
-                     color: Colors.black,
-                   ),
-                 ),
-                 Container(
-                   width: 250,
-                   height: 1.0,
-                   color:Color(0xFFcacdcb),
-                 ),
-               ],
-             ),
-             SizedBox(
-               height: 20.0,
-             ),
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(
-                   'Phone',
-                   style: TextStyle(
-                     fontWeight:FontWeight.bold,
-                     color: Color(0xFF87888f),
-
-                   ),
-                 ),
-                 Text(
-                   '01097010260',
-                   style: TextStyle(
-                     fontSize:20 ,
-                     color: Colors.black,
-                   ),
-                 ),
-                 Container(
-                   width: 250,
-                   height: 1.0,
-                   color:Color(0xFFcacdcb),
-                 ),
-               ],
-             ),
-             SizedBox(
-               height: 20.0,
-             ),
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(
-                   'Address',
-                   style: TextStyle(
-                     fontWeight:FontWeight.bold,
-                     color: Color(0xFF87888f),
-
-                   ),
-                 ),
-                 Text(
-                   '************8',
-                   style: TextStyle(
-                     fontSize:20 ,
-                     color: Colors.black,
-                   ),
-                 ),
-                 Container(
-                   width: 250,
-                   height: 1.0,
-                   color:Color(0xFFcacdcb),
-                 ),
-               ],
+               ),
              ),
            ],
          ),
-
+         Spacer(),
        ],
      ),
      // body:,
