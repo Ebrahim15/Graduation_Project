@@ -29,7 +29,8 @@ class LoginScreen extends StatelessWidget {
             showToast(errorMessage: state.error, state: ToastStates.ERROR);
           }
           else if (state is LoginSuccessState) {
-            LoginCubit.get(context).saveLoginData(uId: state.uId, context: context);
+
+            LoginCubit.get(context).saveLoginData(stateUId: state.uId, context: context);
             // CacheHelper.saveData(
             //   key: 'uId',
             //   value: state.uId,

@@ -76,19 +76,22 @@ class LoginCubit extends Cubit<LoginStates> {
     }
   }
 
-  void saveLoginData({required String? uId, context}){
+  void saveLoginData({required String? stateUId, context}){
     emit(SaveLoginDataLoading());
 
     CacheHelper.saveData(
       key: 'uId',
-      value: uId,
+      value: stateUId,
     ).then((value){
       navigateAndFinish(context, AppLayout());
+      constUid = stateUId;
       emit(SaveLoginDataSuccess());
     }).catchError((error){
       emit(SaveLoginDataError(error.toString()));
     });
   }
+
+
 
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;

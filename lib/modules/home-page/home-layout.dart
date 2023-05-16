@@ -1,6 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/modules/control-mode/control-mode-screen.dart';
 import 'package:graduation_project/modules/controler/controler-screen.dart';
 import 'package:graduation_project/modules/settings/settings_screen.dart';
 import 'package:graduation_project/shared/components/components.dart';
@@ -8,95 +10,94 @@ import 'package:graduation_project/shared/components/components.dart';
 import 'package:flutter/services.dart';
 
 import 'package:graduation_project/shared/cubit/cubit.dart';
+import 'package:graduation_project/shared/cubit/states.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  String s ="ddfd";
+  // const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
    Size size=MediaQuery.of(context).size;
-    return Scaffold(
-      body: Column(
-
-        children: [
-          Container(
-            height: size.height*0.3,
-           // color: Color(0xFFDCEFDC),
-            child: Stack(
-              children: [
-               Container(
-                 height: size.height*0.3-27,
-                 decoration: const BoxDecoration(
-                     color: Color(0xFFDCEFDC),
-                   borderRadius: BorderRadius.only(
-                     bottomLeft: Radius.circular(20),
-                     bottomRight: Radius.circular(20),
-                   )
-                 ),
-                 child: Padding(
-                   padding: const EdgeInsets.all(30.0),
-                   child: Row(
-                     children: [
-                       Column(
-                         mainAxisAlignment: MainAxisAlignment.center,
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: const [
-                           Text(
-                             'Hi Khaled!',
-                             style: TextStyle(
-                               color: Color(0xFF5EAC59),
-                               fontWeight: FontWeight.bold,
-                               fontSize: 28,
-                             ),
-                           ),
-                           Text(
-                             "Let's get you going",
-                             style: TextStyle(
-                               color: Color(0xFF5EAC59),
-                               fontWeight: FontWeight.bold,
-                               fontSize: 28,
-                             ),
-                           )
-                         ],
-                       ),
-                     ],
-                   ),
-                 ),
-               ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state){},
+      builder: (context, state){
+        var model = AppCubit.get(context).model;
+        return Scaffold(
+          body: Column(
+            children: [
+              Container(
+                height: size.height*0.3,
+                // color: Color(0xFFDCEFDC),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: size.height*0.3-27,
+                      decoration: const BoxDecoration(
+                          color: Color(0xFFDCEFDC),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          )
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Row(
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Hi ${model?.name ?? "..."}',
+                                  style: TextStyle(
+                                    color: Color(0xFF5EAC59),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 28,
+                                  ),
+                                ),
+                                Text(
+                                  "Let's get you going",
+                                  style: TextStyle(
+                                    color: Color(0xFF5EAC59),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 28,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                    top: 20,
-                    right: 20,
-                    left: 20,
+                      top: 20,
+                      right: 20,
+                      left: 20,
                     ),
                     child: Row(
                       children: [
                         homeCard(
-                            cardMasage:'Start mowing' ,
-                            cardImage:'assets/images/grass_cutter2.png',
+                          cardMasage:'Start mowing' ,
+                          cardImage:'assets/images/grass_cutter2.png',
                           boxSz: 0,
                           imgHigh: 130,
                           imgWid: 130,
-                          ontap: (){ Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return Grscreen();
-                              },
-                            ),
-                                (_) => false,
-                          );
+                          ontap:(){
+                            navigateRootAndFinish(context, ControlModeScreen());
                           },
                         ),
                         const SizedBox(
@@ -142,12 +143,16 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-        ],
-      ),
+            ],
+          ),
 
-      );
+        );
+      },
+    );
   }
 }
+
+
 // Card(
 //   shape: RoundedRectangleBorder(
 //       borderRadius: BorderRadius.circular(20)

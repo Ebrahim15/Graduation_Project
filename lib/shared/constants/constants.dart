@@ -5,7 +5,7 @@ import '../components/components.dart';
 import '../network/local/cache_helper.dart';
 import 'package:flutter/material.dart';
 
-var uId;
+var constUid;
 
 void signOut(context)
 {

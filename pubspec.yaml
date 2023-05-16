@@ -47,11 +47,15 @@ dependencies:
   flutter_switch: ^0.3.2
   sleek_circular_slider: ^2.0.1
   smooth_page_indicator: ^1.0.1
+  holding_gesture: ^1.1.0
+  percent_indicator: ^4.2.3
 
   #firebase
   firebase_core: ^2.7.0
   firebase_auth: ^4.2.9
   cloud_firestore: ^4.4.3
+  firebase_database: ^10.1.2
+
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +85,7 @@ flutter:
     - assets/images/soil1.png
     - assets/images/
     - assets/images/feedback2.png
+
 
   # assets:
   #   - images/a_dot_burr.jpeg

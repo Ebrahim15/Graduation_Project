@@ -15,6 +15,7 @@ class LetsGetStartedScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: Container(
           width: double.infinity,
           child: Padding(
