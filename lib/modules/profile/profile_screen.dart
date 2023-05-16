@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/modules/edit_profile_screen/edit_profile_.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
 
@@ -15,7 +16,7 @@ class Profile extends StatelessWidget {
        backgroundColor: Colors.white,
        elevation: 0.00,
        centerTitle:true ,
-       title:Text(
+       title:const Text(
            'My Profile',
          style: TextStyle(
            fontSize: 16,
@@ -28,13 +29,10 @@ class Profile extends StatelessWidget {
        children: [
         lineItem(),
          Padding(
-           padding: const EdgeInsets.all(20.0),
+           padding: const EdgeInsets.all(50.0),
            child: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
              children: [
-               const CircleAvatar(
-                 radius: 70,
-                 backgroundImage:AssetImage ('assets/images/profile2.jpg'),
-               ),
                const SizedBox(
                  width: 20.0,
                ),
@@ -68,7 +66,9 @@ class Profile extends StatelessWidget {
                          wid: 130,
                          high: 40,
                          buttonText: 'Edit Profile',
-                         onPressed: () {  }
+                         onPressed: () {
+                           navigateTo(context, EditProfileScreen());
+                         }
                      ),
                    ],
                  ),

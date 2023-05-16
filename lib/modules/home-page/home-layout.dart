@@ -1,7 +1,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/modules/controler/controler-screen.dart';
+import 'package:graduation_project/modules/aboutus_screen/aboutus_screen.dart';
+import 'package:graduation_project/modules/controler_screen/controler-screen.dart';
+import 'package:graduation_project/modules/location_screen/location_screen.dart';
 import 'package:graduation_project/modules/settings/settings_screen.dart';
 import 'package:graduation_project/shared/components/components.dart';
 
@@ -9,6 +11,8 @@ import 'package:flutter/services.dart';
 
 import 'package:graduation_project/shared/cubit/cubit.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+import '../feadback_screen/feedback_screen.dart';
 
 
 
@@ -89,7 +93,9 @@ class HomeScreen extends StatelessWidget {
                           boxSz: 0,
                           imgHigh: 130,
                           imgWid: 130,
-                          ontap: (){ Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                          ontap: ()
+                          {
+                            Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
                                 return Grscreen();
@@ -103,11 +109,21 @@ class HomeScreen extends StatelessWidget {
                           width:20 ,
                         ),
                         homeCard(
-                          cardMasage:'Check your readings' ,
-                          cardImage:'assets/images/soil1.png',
+                          cardMasage:'Locate your mower' ,
+                          cardImage:'assets/images/location-pin.png',
                           // imgHigh: ,
                           // imgWid: ,
-                          ontap: (){},
+                          ontap: ()
+                          {
+                            Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return MapScreen();
+                                },
+                              ),
+                                  (_) => false,
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -125,7 +141,17 @@ class HomeScreen extends StatelessWidget {
                           cardImage:'assets/images/feedback2.png',
                           // imgHigh: ,
                           // imgWid: ,
-                          ontap: (){},
+                          ontap: ()
+                          {
+                            Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return FeedBack();
+                                },
+                              ),
+                                  (_) => false,
+                            );
+                          },
                         ),
                         const SizedBox(
                           width:20 ,
@@ -135,7 +161,17 @@ class HomeScreen extends StatelessWidget {
                           cardImage:'assets/images/aboutus1.png',
                           // imgHigh: ,
                           // imgWid: ,
-                          ontap: (){},
+                          ontap: ()
+                          {
+                            Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return AboutUs();
+                                },
+                              ),
+                                  (_) => false,
+                            );
+                          },
                         ),
                       ],
                     ),

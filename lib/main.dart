@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
-
 import 'package:graduation_project/modules/home-page/home-layout.dart';
 import 'package:graduation_project/modules/lets-get-started/lets_get_started_screen.dart';
 import 'package:graduation_project/modules/login/cubit/cubit.dart';
@@ -13,7 +12,6 @@ import 'package:graduation_project/modules/on_boarding/on_boarding_screen.dart';
 import 'package:graduation_project/modules/registration/cubit/cubit.dart';
 import 'package:graduation_project/modules/registration/registration_screen.dart';
 import 'package:graduation_project/modules/splash/splash_screen.dart';
-
 import 'package:graduation_project/shared/bloc_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
@@ -32,7 +30,6 @@ void main() async {
   );
 
   Bloc.observer = MyBlocObserver();
-
 
   await CacheHelper.init();
 
@@ -54,15 +51,11 @@ void main() async {
   else {
     widget = LetsGetStartedScreen();
   }
-
-
   runApp(MyApp(
     startWidget: widget,
   ));
 
 }
-
-
 class MyApp extends StatelessWidget {
   final Widget startWidget;
   MyApp({
@@ -85,11 +78,12 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               appBarTheme: AppBarTheme(
                 systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
+                  statusBarColor: Colors.grey,
                 )
               ),
             ),
             home: SplashScreen(startWidget: startWidget,),
+            //SplashScreen(startWidget: startWidget,),
           );
         },
       ),

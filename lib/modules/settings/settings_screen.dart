@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/modules/connection/connection_screen.dart';
+import 'package:graduation_project/modules/helpandsuport_screen/helpandsupport_screen.dart';
 
 import 'package:graduation_project/shared/components/components.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
@@ -28,7 +29,7 @@ class _SettingsState extends State<Settings> {
               backgroundColor: Colors.white,
               elevation: 0.00,
               centerTitle: true,
-              title: Text(
+              title: const Text(
                 'Settings',
                 style: TextStyle(
                   fontSize: 16,
@@ -42,12 +43,17 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.only(top: 20.0),
                 child: Column(
                   children: [
+                    lineItem(),
                     defaultNavigator(navtext: 'Controls', onPresed: () {}),
                     defaultNavigator(
-                        navtext: 'Bluetooth settings', onPresed: () {}),
+                        navtext: 'Connection settings',
+                        onPresed: () {
+                          navigateAndFinish(context, WifiSetter());
+                        }
+                        ),
                     defaultNavigator(
-                        navtext: 'Help and support', onPresed: () {}),
-                    SizedBox(
+                        navtext: 'Help and support', onPresed: () { navigateAndFinish(context,HelpAndSupport());}),
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -58,7 +64,7 @@ class _SettingsState extends State<Settings> {
                       ),
                       child: Row(
                         children: [
-                          Text(
+                          const Text(
                             'Dark mood',
                             style: TextStyle(
                               fontSize: 15.0,
