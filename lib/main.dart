@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
+import 'package:graduation_project/modules/esp-connection-tutorial/esp.dart';
 
 import 'package:graduation_project/modules/home-page/home-layout.dart';
 import 'package:graduation_project/modules/lets-get-started/lets_get_started_screen.dart';
@@ -40,12 +41,14 @@ void main() async {
 
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
 
-  uId = CacheHelper.getData(key:'uId');
+  bool? isDark = CacheHelper.getData(key: 'isDark');
+
+  constUid = CacheHelper.getData(key:'uId');
 
   Widget widget;
 
   if(onBoarding != null){
-    if (uId != null) {
+    if (constUid != null) {
       widget = AppLayout();
     } else {
       widget = LoginScreen();
@@ -56,8 +59,10 @@ void main() async {
   }
 
 
+
   runApp(MyApp(
     startWidget: widget,
+    isDark: isDark,
   ));
 
 }
@@ -65,34 +70,24 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Widget startWidget;
+  final bool? isDark;
   MyApp({
-    required this.startWidget,
+    required this.startWidget, required this.isDark
   });
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-        create: (context) => AppCubit()..getUserData(),
-    ),
-      ],
-      child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state){},
-        builder: (context, state){
-          return MaterialApp(
-            theme: ThemeData(
-              appBarTheme: AppBarTheme(
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
-                )
-              ),
+        return MaterialApp(
+          theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+              )
             ),
-            home: SplashScreen(startWidget: startWidget,),
-          );
-        },
-      ),
-    );
+          ),
+          home: SplashScreen(startWidget: startWidget,),
+        );
   }
+
 }

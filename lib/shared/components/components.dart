@@ -75,7 +75,7 @@ Widget profileItem({
           itemName,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Color(0xFF87888f),
+            // color: Color(0xFF87888f),
           ),
         ),
         Text(
@@ -83,7 +83,7 @@ Widget profileItem({
           maxLines: 2,
           style: TextStyle(
             fontSize: 20,
-            color: Colors.black,
+            // color: Colors.black,
           ),
         ),
         Container(
@@ -107,6 +107,7 @@ Widget lineItem({
 Widget defaultNavigator({
   required String navtext,
   required VoidCallback onPresed,
+  required context
 }) =>
     Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 10,),
@@ -114,15 +115,16 @@ Widget defaultNavigator({
 //m+inAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(navtext,
-            style: TextStyle(
-              fontSize: 15.0,
-              color: Colors.black,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium,
+            // style: TextStyle(
+            //   fontSize: 15.0,
+            //   color: Colors.black,
+            // ),
           ),
           Spacer(),
           IconButton(
             onPressed: onPresed,
-            icon: Icon(Icons.arrow_forward_ios),
+            icon: Icon(Icons.arrow_forward_ios,),
           ),
         ],
       ),
@@ -224,8 +226,7 @@ required String errorMessage,
 required ToastStates state
 }) => Fluttertoast.showToast(
 msg: errorMessage,
-toastLength: Toast.LENGTH_LONG,
-gravity: ToastGravity.BOTTOM,
+toastLength: Toast.LENGTH_LONG,gravity: ToastGravity.BOTTOM,
 timeInSecForIosWeb: 5,
 backgroundColor: chooseToastColor(state),
 textColor: Colors.white,
@@ -268,3 +269,23 @@ Widget defaultTextButton(
       ),
     );
 
+Future<void> showHelpDialogue(
+    @required context,
+
+    ) async {
+  await showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog( // <-- SEE HERE
+          title: const Text('How to use'),
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Hold the down button to release soil moisture sensor and get the reading, then hold the upward button to remove it from the soil.'),
+            ),
+          ],
+        );
+      });
+}

@@ -5,7 +5,7 @@ class CacheHelper {
 
   static init() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
+    // await sharedPreferences.clear();
   }
 
   static Future<bool> putData({

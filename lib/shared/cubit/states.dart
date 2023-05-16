@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:graduation_project/models/user_model.dart';
+
 abstract class AppStates {}
 
 class AppInitialState extends AppStates {}
@@ -13,3 +16,6 @@ class AppGetUserErrorState extends AppStates {
 }
 
 class LogOutState extends AppStates{}
+
+class AppChangeScreenModeState extends AppStates{}
+// class AppGetProfileData extends AppStates{}

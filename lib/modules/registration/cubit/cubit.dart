@@ -9,6 +9,7 @@ import 'package:graduation_project/modules/registration/cubit/states.dart';
 
 import '../../../layout/app_layout/app_layout.dart';
 import '../../../shared/components/components.dart';
+import '../../../shared/constants/constants.dart';
 import '../../../shared/network/end_points.dart';
 import '../../../shared/network/local/cache_helper.dart';
 import '../../../shared/network/remote/dio_helper.dart';
@@ -104,6 +105,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         .set(model.toMap())
         .then((value){
           emit(RegisterSuccessState(uId));
+          constUid = uId;
           emit(CreateUserSuccessState());
     })
         .catchError((error){
@@ -112,14 +114,14 @@ class RegisterCubit extends Cubit<RegisterStates> {
     });
   }
 
-  void saveRegisterData({required String? uId, context}){
+  void saveRegisterData({required String? stateUid, context}){
     emit(SaveRegisterDataLoading());
 
     CacheHelper.saveData(
       key: 'uId',
-      value: uId,
+      value: stateUid,
     ).then((value){
-      // navigateAndFinish(context, AppLayout());
+      // constUid = stateUid;
       emit(SaveRegisterDataSuccess());
     }).catchError((error){
       emit(SaveRegisterDataError(error.toString()));

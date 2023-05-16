@@ -51,7 +51,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               showToast(errorMessage: state.error, state: ToastStates.ERROR);
             }
           if(state is RegisterSuccessState){
-            RegisterCubit.get(context).saveRegisterData(uId: state.uId);
+            RegisterCubit.get(context).saveRegisterData(stateUid: state.uId);
           }
         },
         builder: (context, state) {
