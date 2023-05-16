@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
+
 import 'package:graduation_project/modules/esp-connection-tutorial/esp.dart';
 
 import 'package:graduation_project/modules/home-page/home-layout.dart';
@@ -14,7 +15,6 @@ import 'package:graduation_project/modules/on_boarding/on_boarding_screen.dart';
 import 'package:graduation_project/modules/registration/cubit/cubit.dart';
 import 'package:graduation_project/modules/registration/registration_screen.dart';
 import 'package:graduation_project/modules/splash/splash_screen.dart';
-
 import 'package:graduation_project/shared/bloc_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
@@ -33,7 +33,6 @@ void main() async {
   );
 
   Bloc.observer = MyBlocObserver();
-
 
   await CacheHelper.init();
 
@@ -58,16 +57,12 @@ void main() async {
     widget = LetsGetStartedScreen();
   }
 
-
-
   runApp(MyApp(
     startWidget: widget,
     isDark: isDark,
   ));
 
 }
-
-
 class MyApp extends StatelessWidget {
   final Widget startWidget;
   final bool? isDark;
@@ -78,16 +73,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
         return MaterialApp(
           theme: ThemeData(
             appBarTheme: AppBarTheme(
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: Colors.white,
               )
+
             ),
           ),
           home: SplashScreen(startWidget: startWidget,),
         );
+
   }
 
 }

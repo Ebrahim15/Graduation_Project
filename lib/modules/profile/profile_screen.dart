@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/models/user_model.dart';
+
+import 'package:graduation_project/modules/edit_profile_screen/edit_profile_.dart';
+
 import 'package:graduation_project/modules/login/login_screen.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
 import 'package:graduation_project/shared/cubit/states.dart';
@@ -80,6 +84,7 @@ class _ProfileState extends State<Profile> {
                                   maxLines: 2,
                                   overflow:TextOverflow.ellipsis ,
                                   style:Theme.of(context).textTheme.bodySmall,
+
 
                                 ),
                                 Text(

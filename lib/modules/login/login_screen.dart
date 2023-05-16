@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
+//import 'package:graduation_project/modules/change_password_screen/change_password.dart';
 import 'package:graduation_project/modules/home-page/home-layout.dart';
 import 'package:graduation_project/shared/components/components.dart';
 import 'package:graduation_project/modules/login/cubit/cubit.dart';
 import 'package:graduation_project/shared/network/local/cache_helper.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../change_password_screen/change_password_screen.dart';
 import '../registration/registration_screen.dart';
 import 'cubit/states.dart';
 
@@ -111,7 +113,9 @@ class LoginScreen extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                navigateTo(context, ChangePasswordScreen());
+                              },
                               child: Text(
                                 "Forgot your password",
                                 style: TextStyle(

@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:graduation_project/modules/esp-connection-tutorial/esp.dart';
 
-import 'package:graduation_project/shared/components/components.dart';
+import 'package:graduation_project/modules/connection/connection_screen.dart';
+import 'package:graduation_project/modules/helpandsuport_screen/helpandsupport_screen.dart';
 
+
+import 'package:graduation_project/shared/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
@@ -32,11 +36,6 @@ class _SettingsState extends State<Settings> {
               title: Text(
                 'Settings',
                 style:Theme.of(context).textTheme.bodyLarge,
-                // style: TextStyle(
-                //   fontSize: 16,
-                //   fontWeight: FontWeight.bold,
-                //   color: Color(0xFF4d4d4d),
-                // ),
               ),
             ),
             body: SingleChildScrollView(
@@ -44,14 +43,19 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.only(top: 20.0),
                 child: Column(
                   children: [
+
+                    lineItem(),
                     defaultNavigator(navtext: 'Controls', onPresed: () {}, context: context),
+
                     defaultNavigator(
+
                         navtext: 'Bluetooth settings', onPresed: () {
                           navigateTo(context, EspScreen());
                     }, context: context),
+
                     defaultNavigator(
-                        navtext: 'Help and support', onPresed: () {}, context: context),
-                    SizedBox(
+                        navtext: 'Help and support', onPresed: () { navigateAndFinish(context,HelpAndSupport());}, context: context),
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -62,6 +66,7 @@ class _SettingsState extends State<Settings> {
                       ),
                       child: Row(
                         children: [
+
                           Text(
                             'Dark mode',
                             style: Theme.of(context).textTheme.bodyMedium,
@@ -69,6 +74,7 @@ class _SettingsState extends State<Settings> {
                             //   fontSize: 15.0,
                             //   // color: Colors.black,
                             // ),
+
                           ),
                           Spacer(),
                           IconButton(
@@ -80,25 +86,7 @@ class _SettingsState extends State<Settings> {
                         ],
                       ),
                     ),
-//             Padding(
-//               padding: const EdgeInsets.only(left: 20, right: 20,top: 10,),
-//               child: Row(
-// //m+inAxisAlignment: MainAxisAlignment.spaceAround,
-//                 children: [
-//                   Text('Dark mood',
-//                     style: TextStyle(
-//                       fontSize: 15.0,
-//                       color: Colors.black,
-//                     ),
-//                   ),
-//                   Spacer(),
-//                   IconButton(
-//                     onPressed: (){},
-//                     icon: Icon(Icons.dark_mode_outlined),
-//                   ),
-//                 ],
-//               ),
-//             ),
+
                   ],
                 ),
               ),

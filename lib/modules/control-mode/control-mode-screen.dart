@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
 import 'package:graduation_project/modules/auto-mode/auto-mode-screen.dart';
-import 'package:graduation_project/modules/controler/controler-screen.dart';
+// import 'package:graduation_project/modules/controler/controler-screen.dart';
 
 import '../../shared/components/components.dart';
+import '../controler_screen/controler-screen.dart';
 
 class ControlModeScreen extends StatelessWidget {
   const ControlModeScreen({Key? key}) : super(key: key);

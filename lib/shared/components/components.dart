@@ -5,10 +5,10 @@ import 'package:graduation_project/shared/styles/colors.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 Widget defaultTextFormField({
-  required TextEditingController textController,
+   TextEditingController? textController,
   required String hintText,
   required TextInputType keyboardType,
-  required String? Function(String?)? validator,
+  String? Function(String?)? validator,
   Function(String value)? onSubmit,
   bool isPassword = false,
   IconData? suffix,
@@ -183,6 +183,7 @@ Widget homeCard
     );
 
 Widget defaultLogInOutButton({
+  Color bColor = const Color(0xff00A429),
 required String buttonText,
 required VoidCallback? onPressed,
 double? wid=155,
@@ -192,7 +193,7 @@ width: wid,
 height: high,
 decoration: BoxDecoration(
 borderRadius: BorderRadius.circular(10),
-color: HexColor("#00A429"),
+color: bColor,
 ),
 child: MaterialButton(
 onPressed: onPressed,
