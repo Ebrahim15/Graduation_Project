@@ -87,6 +87,7 @@ class FeedBack extends StatelessWidget {
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
+                        FeedBackCubit.get(context).rating.text= rating.toString();
                         print(rating);
                       },
                     ),
@@ -146,16 +147,19 @@ class FeedBack extends StatelessWidget {
                       buttonText: 'submit',
                       onPressed: () async {
                         print(FeedBackCubit.get(context).controller.text);
-                        if (FeedBackCubit.get(context)
-                            .dialogKey
-                            .currentState!
-                            .validate()) {
+                        if (
+                        FeedBackCubit.
+                        get(context).
+                        dialogKey.currentState != null && FeedBackCubit.
+                        get(context).dialogKey.currentState!.validate()) {
+
                           String massage;
                           try {
                             final collection = FirebaseFirestore.instance
-                                .collection('database');
+                                .collection('feedback');
                             await collection.doc().set({
                               'timestamp': FieldValue.serverTimestamp(),
+                              'rtaing':FeedBackCubit.get(context).rating.text,
                               'feedback':FeedBackCubit.get(context).controller.text,
                             });
                             massage='Feedback sent successfully';

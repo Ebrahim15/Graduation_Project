@@ -10,5 +10,8 @@ class FeedBackCubit extends Cubit<FeedBackStats>
   static FeedBackCubit get (context) => BlocProvider.of(context);
 
   final TextEditingController controller = TextEditingController();
+  final TextEditingController rating = TextEditingController();
+
+
   final GlobalKey<FormState> dialogKey = GlobalKey();
 }

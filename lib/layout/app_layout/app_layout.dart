@@ -26,7 +26,7 @@ class _AppLayoutState extends State<AppLayout> {
       return [
         HomeScreen(),
         Profile(),
-        Settings(),
+        SettingsScreen(),
         // MainScreen(),
         // SettingsScreen()
       ];

@@ -143,7 +143,7 @@ class _WifiSetterState extends State<WifiSetter> {
             stopScan();
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Settings()),
+              MaterialPageRoute(builder: (context) => SettingsScreen()),
             );
           } ,
         ) ,
