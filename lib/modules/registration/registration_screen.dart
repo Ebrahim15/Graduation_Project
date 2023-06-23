@@ -119,6 +119,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: 18.0,
                         ),
                         defaultTextFormField(
+                          maxLength: 15,
                           textController: phoneNumberController,
                           hintText: "Phone Number",
                           keyboardType: TextInputType.phone,

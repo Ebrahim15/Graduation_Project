@@ -41,6 +41,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
           phone: phone,
           uId: value.user?.uid,
       );
+      FirebaseAuth.instance.currentUser?.sendEmailVerification();
     })
         .catchError((error){
       emit(RegisterErrorState(getMessageFromErrorCode(error.code)));

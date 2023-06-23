@@ -7,10 +7,12 @@ import 'package:graduation_project/modules/login/cubit/cubit.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
 import 'package:graduation_project/modules/profile/profile_screen.dart';
 import 'package:graduation_project/modules/registration/cubit/states.dart';
+import 'package:graduation_project/shared/cubit/cubit.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
 
 import '../../shared/components/components.dart';
+import '../../shared/cubit/states.dart';
 import 'cubit/cubit.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -41,20 +43,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(),
-      child: BlocConsumer<RegisterCubit, RegisterStates>(
-        listener: (context, state) {
-          if(state is CreateUserSuccessState){
-            navigateAndFinish(context, AppLayout());
-          }
-          if(state is RegisterErrorState)
-            {
-              showToast(errorMessage: state.error, state: ToastStates.ERROR);
-            }
-          if(state is RegisterSuccessState){
-            RegisterCubit.get(context).saveRegisterData(uId: state.uId);
-          }
-        },
+      create: (context) => AppCubit()..getUserData(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
@@ -110,39 +101,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         SizedBox(
                           height: 18.0,
                         ),
-                        defaultTextFormField(
-                          textController: emailController,
-                          hintText: "New Email",
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            List<String> mail = [
-                              "gmail",
-                              "hotmail",
-                              "outlook",
-                              "yahoo"
-                            ];
-                            if (value?.isEmpty == true) {
-                              return "Email cannot be empty";
-                            }
-                            else if(
-                                value?.substring(value.indexOf("@")+1) != "gmail.com" &&
-                                value?.substring(value.indexOf("@")+1) != "yahoo.com" &&
-                                value?.substring(value.indexOf("@")+1) != "outlook.com" &&
-                                value?.substring(value.indexOf("@")+1) != "hotmail.com"
-                            ){
-                              showToast(errorMessage: "Email address is invalid.", state: ToastStates.ERROR);
-                              return "Invalid email address";
-                            }
-                            else {
-                              print("Email: ${value?.substring(value.indexOf("@")+1)}");
-                              return null;
-                            }
-                          },
-                        ),
+
                         SizedBox(
                           height: 18.0,
                         ),
                         defaultTextFormField(
+                          maxLength: 15,
                           textController: phoneNumberController,
                           hintText: " New Phone Number",
                           keyboardType: TextInputType.phone,
@@ -158,28 +122,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           height: 50.0,
                         ),
                         ConditionalBuilder(
-                            condition: state is !RegisterLoadingState,
+                            condition: state is !EditProfile,
                             builder: (context) => defaultLogInOutButton(
                               buttonText: 'Confirm',
                               onPressed: () {
-                                if (formKey.currentState?.validate() == true &&
-                                    termsChecked == true) {
-                                  RegisterCubit.get(context).userRegister(
-                                    name: nameController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    phone: phoneNumberController.text,
-                                  );
-                                }
-                                if (termsChecked == false) {
-                                  setState(() {
-                                    termsErrorText =
-                                    "Terms of service should be accepted";
-                                  });
-                                } else {
-                                  setState(() {
-                                    termsErrorText = "";
-                                  });
+                                if (formKey.currentState?.validate() == true) {
+                                  AppCubit.get(context).editProfile(name: nameController.text, phoneNumber: phoneNumberController.text);
+                                  navigateTo(context, Profile());
                                 }
                               },
                             ),
@@ -187,30 +136,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               valueColor: AlwaysStoppedAnimation<Color>(HexColor("#00A429")),
                             ),)
                         ),
-                        // defaultLogInOutButton(
-                        //   buttonText: 'Sign up',
-                        //   onPressed: () {
-                        //     if (formKey.currentState?.validate() == true &&
-                        //         termsChecked == true) {
-                        //         RegisterCubit.get(context).userRegister(
-                        //           name: nameController.text,
-                        //           email: emailController.text,
-                        //           password: passwordController.text,
-                        //           phone: phoneNumberController.text,
-                        //         );
-                        //     }
-                        //     if (termsChecked == false) {
-                        //       setState(() {
-                        //         termsErrorText =
-                        //             "Terms of service should be accepted";
-                        //       });
-                        //     } else {
-                        //       setState(() {
-                        //         termsErrorText = "";
-                        //       });
-                        //     }
-                        //   },
-                        // ),
                         SizedBox(
                           height: 70.0,
                         ),

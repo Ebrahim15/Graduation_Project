@@ -14,14 +14,14 @@ import 'package:graduation_project/shared/constants/constants.dart';
 import 'package:graduation_project/shared/cubit/cubit.dart';
 import 'package:graduation_project/shared/cubit/states.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -45,16 +45,16 @@ class _SettingsState extends State<Settings> {
                   children: [
 
                     lineItem(),
-                    defaultNavigator(navtext: 'Controls', onPresed: () {}, context: context),
+                    // defaultNavigator(navtext: 'Controls', onPresed: () {}, context: context),
+
+                    // defaultNavigator(
+                    //
+                    //     navtext: 'Bluetooth settings', onPresed: () {
+                    //       navigateTo(context, EspScreen());
+                    // }, context: context),
 
                     defaultNavigator(
-
-                        navtext: 'Bluetooth settings', onPresed: () {
-                          navigateTo(context, EspScreen());
-                    }, context: context),
-
-                    defaultNavigator(
-                        navtext: 'Help and support', onPresed: () { navigateAndFinish(context,HelpAndSupport());}, context: context),
+                        navtext: 'Help and support', onPresed: () { navigateTo(context, HelpAndSupport());}, context: context),
                     const SizedBox(
                       height: 20,
                     ),
@@ -67,22 +67,22 @@ class _SettingsState extends State<Settings> {
                       child: Row(
                         children: [
 
-                          Text(
-                            'Dark mode',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            // style: TextStyle(
-                            //   fontSize: 15.0,
-                            //   // color: Colors.black,
-                            // ),
-
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {
-                              AppCubit.get(context).changeAppMode(null);
-                            },
-                            icon: Icon(Icons.dark_mode_outlined),
-                          ),
+                          // Text(
+                          //   'Dark mode',
+                          //   style: Theme.of(context).textTheme.bodyMedium,
+                          //   // style: TextStyle(
+                          //   //   fontSize: 15.0,
+                          //   //   // color: Colors.black,
+                          //   // ),
+                          //
+                          // ),
+                          // Spacer(),
+                          // IconButton(
+                          //   onPressed: () {
+                          //     AppCubit.get(context).changeAppMode(null);
+                          //   },
+                          //   icon: Icon(Icons.dark_mode_outlined),
+                          // ),
                         ],
                       ),
                     ),

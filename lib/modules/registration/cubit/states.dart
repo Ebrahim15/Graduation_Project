@@ -1,3 +1,5 @@
+import 'package:graduation_project/modules/edit_profile_screen/cubit/states.dart';
+
 abstract class RegisterStates {}
 
 class RegisterInitialState extends RegisterStates{}
@@ -34,3 +36,17 @@ class SaveRegisterDataError extends RegisterStates{
 
   SaveRegisterDataError(this.error);
 }
+
+// class EditProfile extends RegisterStates{}
+//
+// class EditProfileSuccess extends RegisterStates{}
+
+// class AppGetUserLoadingState extends RegisterStates{}
+//
+// class AppGetUserSuccessState extends RegisterStates{}
+//
+// class AppGetUserErrorState extends RegisterStates{
+//   final String error;
+//
+//   AppGetUserErrorState(this.error);
+// }

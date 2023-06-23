@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:graduation_project/firebase_options.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -11,6 +10,9 @@ import 'package:graduation_project/shared/constants/constants.dart';
 import '../../layout/app_layout/app_layout.dart';
 import '../../shared/components/components.dart';
 import 'cubit/states.dart';
+import 'package:graduation_project/modules/settings/settings_screen.dart';
+
+
 
 class HelpAndSupport extends StatelessWidget {
   //const ({Key? key}) : super(key: key);
@@ -45,7 +47,7 @@ class HelpAndSupport extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AppLayout()),
+                    MaterialPageRoute(builder: (context) => SettingsScreen()),
                   );
                 },
               ),

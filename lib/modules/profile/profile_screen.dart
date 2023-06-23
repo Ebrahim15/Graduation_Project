@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/models/user_model.dart';
+import 'package:graduation_project/modules/change_password_screen/change_password_screen.dart';
 
 import 'package:graduation_project/modules/edit_profile_screen/edit_profile_.dart';
 
@@ -101,7 +102,9 @@ class _ProfileState extends State<Profile> {
                                     wid: 140,
                                     high: 40,
                                     buttonText: 'Edit Profile',
-                                    onPressed: () {  }
+                                    onPressed: () {
+                                      navigateTo(context, EditProfileScreen());
+                                    }
                                 ),
                               ],
                             ),
@@ -174,7 +177,7 @@ class _ProfileState extends State<Profile> {
                     lineItem(),
                     GestureDetector (
                       onTap: (){
-                        // AppCubit.get(context).getProfileUserData();
+                        navigateTo(context, ChangePasswordScreen());
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),

@@ -109,9 +109,10 @@ class Grscreen extends StatelessWidget {
                                     HoldDetector(
                                       onHold: () {
                                         print("FORWAAAARRRRRDDD!!!!!!!");
-                                        cubit.moveCar(2);
+                                        // cubit.moveCar(2);
+                                        cubit.moveCar(5);
                                       },
-                                      onCancel: (){cubit.moveCar(6);},
+                                      onCancel: (){cubit.moveCar(1);},
                                       child: FloatingActionButton(
                                         heroTag: "Up",
                                         elevation: 0,
@@ -126,9 +127,9 @@ class Grscreen extends StatelessWidget {
                                       children: [
                                         HoldDetector(
                                           onHold: () {
-                                            cubit.moveCar(5);
+                                            cubit.moveCar(3);
                                           },
-                                          onCancel: (){cubit.moveCar(6);},
+                                          onCancel: (){cubit.moveCar(1);},
                                           child: FloatingActionButton(
                                             heroTag: "Left",
                                             elevation: 0,
@@ -146,9 +147,9 @@ class Grscreen extends StatelessWidget {
                                         ),
                                         HoldDetector(
                                           onHold: () {
-                                            cubit.moveCar(4);
+                                            cubit.moveCar(2);
                                           },
-                                          onCancel: (){cubit.moveCar(6);},
+                                          onCancel: (){cubit.moveCar(1);},
                                           child: FloatingActionButton(
                                             heroTag: "Right",
                                             elevation: 0,
@@ -163,9 +164,9 @@ class Grscreen extends StatelessWidget {
                                       ],),
                                     HoldDetector(
                                       onHold: () {
-                                        cubit.moveCar(3);
+                                        cubit.moveCar(4);
                                       },
-                                      onCancel: (){cubit.moveCar(6);},
+                                      onCancel: (){cubit.moveCar(1);},
                                       child: FloatingActionButton(
                                         heroTag: "Down",
                                         elevation: 0,
@@ -180,30 +181,30 @@ class Grscreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Blade",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Transform.scale(
-                                  scale: 1.3,
-                                  child: Switch(
-                                    value: cubit.waterPumpValue,
-                                    onChanged: (bool x) {
-                                      cubit.waterPumpSwitch();
-                                    },
-                                    activeColor: HexColor(defaultColor),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       "Blade",
+                            //       style: TextStyle(
+                            //         fontSize: 15,
+                            //       ),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 30,
+                            //     ),
+                            //     Transform.scale(
+                            //       scale: 1.3,
+                            //       child: Switch(
+                            //         value: cubit.bladeValue,
+                            //         onChanged: (bool x) {
+                            //           cubit.bladeSwitch();
+                            //         },
+                            //         activeColor: HexColor(defaultColor),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             Column(
                               children: [
                                 Material(
@@ -231,15 +232,21 @@ class Grscreen extends StatelessWidget {
                                               children: [
                                                 HoldDetector(
                                                   onHold: () {
-                                                    cubit.soilMoisture(1);
+                                                    if(cubit.carMove == 1){
+                                                      cubit.soilMoisture(10);
+                                                    }
                                                   },
-                                                  onCancel: (){cubit.soilMoisture(6);},
+                                                  onCancel: (){
+                                                    if(cubit.carMove == 10 || cubit.carMove == 11){
+                                                      cubit.soilMoisture(1);
+                                                    }
+                                                    // cubit.soilMoisture(1);
+                                                  },
                                                   child: FloatingActionButton(
                                                     heroTag: "Up",
                                                     elevation: 0.0,
-                                                    backgroundColor:
-                                                    HexColor(defaultColor),
-                                                    onPressed: () {},
+                                                    backgroundColor: cubit.carMove != 1  && cubit.carMove != 10 && cubit.carMove != 11 ? Colors.grey : HexColor(defaultColor),
+                                                    onPressed: cubit.carMove != 1 ? null : () {},
                                                     child: Icon(
                                                       Icons.arrow_upward,
                                                       color: Colors.white,
@@ -252,15 +259,21 @@ class Grscreen extends StatelessWidget {
                                                 ),
                                                 HoldDetector(
                                                   onHold: () {
-                                                    cubit.soilMoisture(2);
+                                                    if(cubit.carMove == 1){
+                                                      cubit.soilMoisture(11);
+                                                    }
                                                   },
-                                                  onCancel: (){cubit.soilMoisture(6);},
+                                                  onCancel: (){
+                                                    if(cubit.carMove == 10 || cubit.carMove == 11){
+                                                      cubit.soilMoisture(1);
+                                                    }
+                                                    // cubit.soilMoisture(1);
+                                                  },
                                                   child: FloatingActionButton(
                                                     heroTag: "Down",
                                                     elevation: 0.0,
-                                                    backgroundColor:
-                                                    HexColor(defaultColor),
-                                                    onPressed: () {},
+                                                    backgroundColor: cubit.carMove != 1  && cubit.carMove != 10 && cubit.carMove != 11 ? Colors.grey : HexColor(defaultColor),
+                                                    onPressed: cubit.carMove != 1 ? null : () {},
                                                     child: Icon(
                                                       Icons.arrow_downward,
                                                       color: Colors.white,

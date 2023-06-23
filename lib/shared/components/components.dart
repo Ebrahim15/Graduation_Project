@@ -13,11 +13,14 @@ Widget defaultTextFormField({
   bool isPassword = false,
   IconData? suffix,
   VoidCallback? suffixPressed,
+  int maxLength = 100,
 }) =>
     Container(
       width: 350,
       child: TextFormField(
+        maxLength: maxLength,
         decoration: InputDecoration(
+          counter: SizedBox.shrink(),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
@@ -284,7 +287,7 @@ Future<void> showHelpDialogue(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Hold the down button to release soil moisture sensor and get the reading, then hold the upward button to remove it from the soil.'),
+              child: const Text("Notice: The sensor works when the mower isn't moving.\nHold the down button to release soil moisture sensor and get the reading, then hold the upward button to remove it from the soil."),
             ),
           ],
         );

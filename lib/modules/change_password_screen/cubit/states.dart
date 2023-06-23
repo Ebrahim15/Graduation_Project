@@ -4,11 +4,7 @@ class ChangePasswordInitialState extends ChangePasswordStates{}
 
 class ChangePasswordLoadingState extends ChangePasswordStates{}
 
-class ChangePasswordSuccessState extends ChangePasswordStates{
-  final String? uId;
-
-  ChangePasswordSuccessState(this.uId);
-}
+class ChangePasswordSuccessState extends ChangePasswordStates{}
 
 class ChangePasswordErrorState extends ChangePasswordStates{
   final String error;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:graduation_project/layout/app_layout/app_layout.dart';
+import 'package:graduation_project/modules/forgot-password-screen/forgot-password.dart';
 //import 'package:graduation_project/modules/change_password_screen/change_password.dart';
 import 'package:graduation_project/modules/home-page/home-layout.dart';
 import 'package:graduation_project/shared/components/components.dart';
@@ -33,12 +34,6 @@ class LoginScreen extends StatelessWidget {
           else if (state is LoginSuccessState) {
 
             LoginCubit.get(context).saveLoginData(stateUId: state.uId, context: context);
-            // CacheHelper.saveData(
-            //   key: 'uId',
-            //   value: state.uId,
-            // ).then((value){
-            //   navigateAndFinish(context, AppLayout());
-            // });
           }
         },
         builder: (context, state) {
@@ -114,7 +109,7 @@ class LoginScreen extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                               onPressed: () {
-                                navigateTo(context, ChangePasswordScreen());
+                                navigateTo(context, ForgotPasswordScreen());
                               },
                               child: Text(
                                 "Forgot your password",

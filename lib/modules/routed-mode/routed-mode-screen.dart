@@ -13,8 +13,10 @@ import '../control-mode/control-mode-screen.dart';
 import '../esp-connection-tutorial/cubit/cubit.dart';
 import '../esp-connection-tutorial/cubit/states.dart';
 
-class AutoModeScreen extends StatelessWidget {
-  const AutoModeScreen({Key? key}) : super(key: key);
+class RoutedModeScreen extends StatelessWidget {
+  var xController = TextEditingController();
+  var yController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class AutoModeScreen extends StatelessWidget {
               ),
               centerTitle: true,
               title: const Text(
-                'Auto',
+                'Route',
                 style: TextStyle(color: Color(0xFF4D4D4D)),
               ),
             ),
@@ -56,6 +58,34 @@ class AutoModeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("X: 200"),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                15.0, 15.0, 15.0, 25.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Y: 200"),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 50,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -71,9 +101,9 @@ class AutoModeScreen extends StatelessWidget {
                               Transform.scale(
                                 scale: 1.3,
                                 child: Switch(
-                                  value: cubit.automatedSwitch,
+                                  value: cubit.routedSwitch,
                                   onChanged: (bool x) {
-                                    cubit.autoModeSwitch();
+                                    cubit.routedModeSwitch();
                                   },
                                   activeColor: HexColor(defaultColor),
                                 ),
@@ -81,7 +111,7 @@ class AutoModeScreen extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: 50,
+                            height: 10,
                           ),
                           Column(
                             children: [
@@ -107,26 +137,26 @@ class AutoModeScreen extends StatelessWidget {
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         children: [
                                           Column(
                                             children: [
                                               HoldDetector(
                                                 onHold: () {
-                                                  if(!cubit.automatedSwitch){
+                                                  if(!cubit.routedSwitch){
                                                     cubit.soilMoisture(10);
                                                   }
                                                 },
                                                 onCancel: (){
-                                                  if(!cubit.automatedSwitch){
+                                                  if(!cubit.routedSwitch){
                                                     cubit.soilMoisture(1);
                                                   };
-                                                  },
+                                                },
                                                 child: FloatingActionButton(
                                                   heroTag: "Up",
                                                   elevation: 0.0,
-                                                  backgroundColor: cubit.automatedSwitch ? Colors.grey : HexColor(defaultColor),
-                                                  onPressed: cubit.automatedSwitch ? null : () {},
+                                                  backgroundColor: cubit.routedSwitch ? Colors.grey : HexColor(defaultColor),
+                                                  onPressed: cubit.routedSwitch ? null : () {},
                                                   child: Icon(
                                                     Icons.arrow_upward,
                                                     color: Colors.white,
@@ -139,20 +169,20 @@ class AutoModeScreen extends StatelessWidget {
                                               ),
                                               HoldDetector(
                                                 onHold: () {
-                                                  if(!cubit.automatedSwitch){
+                                                  if(!cubit.routedSwitch){
                                                     cubit.soilMoisture(11);
                                                   }
                                                 },
                                                 onCancel: (){
-                                                  if(!cubit.automatedSwitch){
+                                                  if(!cubit.routedSwitch){
                                                     cubit.soilMoisture(1);
-                                                  };
-                                                  },
+                                                  }
+                                                },
                                                 child: FloatingActionButton(
                                                   heroTag: "Down",
                                                   elevation: 0.0,
-                                                  backgroundColor:cubit.automatedSwitch ? Colors.grey : HexColor(defaultColor),
-                                                  onPressed: cubit.automatedSwitch ? null : () {},
+                                                  backgroundColor:cubit.routedSwitch ? Colors.grey : HexColor(defaultColor),
+                                                  onPressed: cubit.routedSwitch ? null : () {},
                                                   child: Icon(
                                                     Icons.arrow_downward,
                                                     color: Colors.white,
@@ -170,12 +200,12 @@ class AutoModeScreen extends StatelessWidget {
                                             lineWidth: 10.0,
                                             animation: true,
                                             circularStrokeCap:
-                                                CircularStrokeCap.round,
+                                            CircularStrokeCap.round,
                                             percent: cubit.sensorReading / 100,
                                             center: new Text(
                                                 "${cubit.sensorReading.toString()}%"),
                                             progressColor:
-                                                HexColor(defaultColor),
+                                            HexColor(defaultColor),
                                           ),
                                         ],
                                       ),

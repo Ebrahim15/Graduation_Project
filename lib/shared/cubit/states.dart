@@ -19,3 +19,13 @@ class LogOutState extends AppStates{}
 
 class AppChangeScreenModeState extends AppStates{}
 // class AppGetProfileData extends AppStates{}
+
+class EditProfile extends AppStates{}
+
+class EditProfileSuccess extends AppStates{}
+
+class EditProfileErrorState extends AppStates {
+  final String error;
+
+  EditProfileErrorState(this.error);
+}

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/models/user_model.dart';
 import 'package:graduation_project/modules/change_password_screen/cubit/states.dart';
+import 'package:graduation_project/modules/forgot-password-screen/cubit/states.dart';
 //import 'package:graduation_project/modules/registration/cubit/states.dart';
 
 import '../../../layout/app_layout/app_layout.dart';
@@ -15,21 +16,20 @@ import '../../../shared/network/local/cache_helper.dart';
 import '../../../shared/network/remote/dio_helper.dart';
 
 
-class ChangePasswordCubit extends Cubit<ChangePasswordStates> {
-  ChangePasswordCubit() : super(ChangePasswordInitialState());
+class ForgotPasswordCubit extends Cubit<ForgotPasswordStates> {
+  ForgotPasswordCubit() : super(ResetPasswordInitialState());
 
-  static ChangePasswordCubit get(context) => BlocProvider.of(context);
-
-  void changeUserPassword(password) async{
-    FirebaseAuth.instance.currentUser?.updatePassword(password)
-        .then((value){
-          emit(ChangePasswordSuccessState());
-    })
-        .catchError((error){
-          emit(ChangePasswordErrorState(error));
-    });
+  static ForgotPasswordCubit get(context) => BlocProvider.of(context);
+  Future<void> sendVerificationEmail(emailAddress) async {
+    emit(SendEmailVerificationState());
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress)
+          .then((value){
+            emit(SendEmailVerificationSuccessState());
+      })
+          .catchError((error){
+            emit(SendEmailVerificationErrorState((getMessageFromErrorCode(error.code))));
+      });
   }
-
   String getMessageFromErrorCode(error) {
     switch (error) {
       case "ERROR_EMAIL_ALREADY_IN_USE":
@@ -91,6 +91,6 @@ class ChangePasswordCubit extends Cubit<ChangePasswordStates> {
 
     suffix = isPassword ? Icons.visibility_outlined: Icons.visibility_off_outlined;
 
-    emit(ChangePasswordVisibilityState());
+    emit(PasswordVisibilityState());
   }
 }

@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,8 +27,15 @@ class AppCubit extends Cubit<AppStates>{
           emit(AppGetUserSuccessState());
     })
         .catchError((error){
-          print(error.toString());
+          print('Error: ${error.toString()}');
       emit(AppGetUserErrorState(error.toString()));
+    });
+
+    DocumentReference reference = FirebaseFirestore.instance.collection('users').doc(constUid);
+    reference.snapshots().listen((event) {
+      model?.name = event.get('name');
+      model?.phone = event.get('phone');
+      emit(AppGetUserSuccessState());
     });
   }
 
@@ -66,4 +74,23 @@ class AppCubit extends Cubit<AppStates>{
   //   });
   //   return model;
   // }
+  void editProfile(
+      {required String? name,
+        required String? phoneNumber}) {
+    emit(EditProfile());
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(CacheHelper.getData(key: 'uId'))
+        .update({
+      'name': name,
+      'phone': phoneNumber,
+    })
+        .then((value){
+      getUserData();
+    })
+        .catchError((error){
+      print(error.toString());
+      emit(EditProfileErrorState(error));
+    });
+  }
 }
