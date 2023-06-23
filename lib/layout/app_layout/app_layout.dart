@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/modules/helpandsuport_screen/helpandsupport_screen.dart';
 import 'package:graduation_project/modules/login/cubit/cubit.dart';
 import 'package:graduation_project/modules/login/cubit/states.dart';
 import 'package:graduation_project/modules/login/login_screen.dart';
@@ -26,7 +27,7 @@ class _AppLayoutState extends State<AppLayout> {
       return [
         HomeScreen(),
         Profile(),
-        SettingsScreen(),
+        HelpAndSupport(),
         // MainScreen(),
         // SettingsScreen()
       ];
@@ -47,8 +48,8 @@ class _AppLayoutState extends State<AppLayout> {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.settings_outlined),
-          title: ("Settings"),
+          icon: const Icon(Icons.support_agent_outlined),
+          title: ("Support"),
           activeColorPrimary: Colors.green,
           inactiveColorPrimary: Colors.grey,
         ),

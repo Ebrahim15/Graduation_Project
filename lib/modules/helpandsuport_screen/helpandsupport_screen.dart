@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:graduation_project/modules/contact-us/contactUs-screen.dart';
 import 'package:graduation_project/modules/feadback_screen/cubit/cubit.dart';
 import 'package:graduation_project/modules/feadback_screen/cubit/states.dart';
+import 'package:graduation_project/modules/feadback_screen/feedback_screen.dart';
 import 'package:graduation_project/modules/helpandsuport_screen/cubit/cubit.dart';
 import 'package:graduation_project/modules/settings/settings_screen.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
@@ -39,19 +41,19 @@ class HelpAndSupport extends StatelessWidget {
                   color: Color(0xFF063C14),
                 ),
               ),
-              leading: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: Color(0xFF063C14),
-                  size: 25,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingsScreen()),
-                  );
-                },
-              ),
+              // leading: IconButton(
+              //   icon: const Icon(
+              //     Icons.arrow_back_ios_new_rounded,
+              //     color: Color(0xFF063C14),
+              //     size: 25,
+              //   ),
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => SettingsScreen()),
+              //     );
+              //   },
+              // ),
             ),
             body: SingleChildScrollView(
               child: Center(
@@ -100,17 +102,21 @@ class HelpAndSupport extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 30,bottom: 30),
                             child: Row(
                               children: [
-                                homeCard(
-                                    cardMasage: 'Watch demo',
-                                    cardImage:'assets/images/watchdemo1.png',
-                                    ontap: (){}),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                homeCard(
-                                    cardMasage: 'Contact us',
-                                    cardImage:'assets/images/contactus32.png',
-                                    ontap: (){})
+                                // homeCard(
+                                //     cardMasage: 'Watch demo',
+                                //     cardImage:'assets/images/watchdemo1.png',
+                                //     ontap: (){}),
+                                // SizedBox(
+                                //   width: 20,
+                                // ),
+                                Center(
+                                  child: homeCard(
+                                      cardMasage: 'Contact us',
+                                      cardImage:'assets/images/contactus32.png',
+                                      ontap: (){
+                                        navigateTo(context,ContactUs());
+                                      }),
+                                )
                               ],
                             ),
                           ),

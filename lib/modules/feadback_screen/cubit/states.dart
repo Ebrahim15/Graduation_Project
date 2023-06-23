@@ -1,5 +1,17 @@
-abstract class FeedBackStats {}
+import 'package:flutter/material.dart';
 
-class FeedBackInitialState extends FeedBackStats{}
+abstract class FeedBackStates {}
 
-class FeedBackChangeState extends FeedBackStats{}
+class FeedBackInitialState extends FeedBackStates{}
+
+class FeedBackChangeState extends FeedBackStates{}
+
+class SendFeedBackState extends FeedBackStates {}
+
+class SendFeedBackSuccessState extends FeedBackStates {}
+
+class SendFeedBackErrorState extends FeedBackStates{
+  final String error;
+
+  SendFeedBackErrorState(this.error);
+}

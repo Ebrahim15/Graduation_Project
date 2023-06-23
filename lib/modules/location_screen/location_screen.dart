@@ -96,7 +96,7 @@ class _MapScreenState extends State<MapScreen> {
               elevation: 0.00,
               //centerTitle: true,
               title: const Text(
-                'Readings',
+                'Location',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

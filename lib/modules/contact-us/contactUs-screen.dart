@@ -4,13 +4,16 @@ import 'package:graduation_project/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:graduation_project/modules/contact-us/cubit/cubit.dart';
+import 'package:graduation_project/modules/contact-us/cubit/states.dart';
 import 'package:graduation_project/modules/feadback_screen/cubit/cubit.dart';
 import 'package:graduation_project/modules/feadback_screen/cubit/states.dart';
+import 'package:graduation_project/modules/helpandsuport_screen/helpandsupport_screen.dart';
 import 'package:graduation_project/shared/constants/constants.dart';
 import '../../layout/app_layout/app_layout.dart';
 import '../../shared/components/components.dart';
 
-class FeedBack extends StatelessWidget {
+class ContactUs extends StatelessWidget {
   //const ({Key? key}) : super(key: key);
   var formKey = GlobalKey<FormState>();
   // GlobalKey<T> dialogKey = GlobalKey();
@@ -18,8 +21,8 @@ class FeedBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext) => FeedBackCubit(),
-      child: BlocConsumer<FeedBackCubit, FeedBackStates>(
+      create: (BuildContext) => ContactUsCubit(),
+      child: BlocConsumer<ContactUsCubit, ContactUsStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
@@ -29,7 +32,7 @@ class FeedBack extends StatelessWidget {
               elevation: 0.00,
               centerTitle: true,
               title: const Text(
-                'Feedback',
+                'Contact Us',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -43,10 +46,7 @@ class FeedBack extends StatelessWidget {
                   size: 25,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AppLayout()),
-                  );
+                  navigateTo(context, HelpAndSupport());
                 },
               ),
             ),
@@ -61,60 +61,30 @@ class FeedBack extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Text(
-                      ' Rate your experience',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                    ),
                     const SizedBox(
                       height: 10,
-                    ),
-                    const Text(
-                      '  Are you Satisfied With our service ?',
-                      style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    RatingBar.builder(
-                      initialRating: 1,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating) {
-                        FeedBackCubit.get(context).rating.text= rating.toString();
-                        print(rating);
-                      },
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    lineItem(width: 300),
                     const SizedBox(
                       height: 20,
                     ),
                     const Text(
-                      'Tell us we can improve ?',
+                      'How can we help you ?',
                       style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                      TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                       child: SizedBox(
                         width: 350,
                         height: 350,
                         child: Form(
                           key: formKey,
                           child: TextFormField(
-                            controller: FeedBackCubit.get(context).controller,
+                            controller: ContactUsCubit.get(context).controller,
                             maxLines: 6,
                             maxLength: 200,
                             keyboardType: TextInputType.multiline,
@@ -128,7 +98,7 @@ class FeedBack extends StatelessWidget {
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(width: 2, color: Colors.grey),
+                                BorderSide(width: 2, color: Colors.grey),
                               ),
                               // contentPadding: EdgeInsets.symmetric(vertical: 400.0),
                               border: OutlineInputBorder(),
@@ -151,12 +121,12 @@ class FeedBack extends StatelessWidget {
                       onPressed: ()  {
                         if(formKey.currentState?.validate() == true){
                           String message = '';
-                          FeedBackCubit.get(context).sendFeedback(message: FeedBackCubit.get(context).controller.text, rating:FeedBackCubit.get(context).rating.text );
-                          if(state is SendFeedBackSuccessState){
-                            message = "Feedback sent successfully";
+                          ContactUsCubit.get(context).sendContactUs(message: ContactUsCubit.get(context).controller.text );
+                          if(state is SendContactUsSuccessState){
+                            message = "Mail sent successfully";
                           }
-                          else if (state is SendFeedBackErrorState){
-                            message = "Error sending Feedback";
+                          else if (state is SendContactUsErrorState){
+                            message = "Error sending Mail";
                           }
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
                         }

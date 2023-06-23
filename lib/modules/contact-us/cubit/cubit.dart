@@ -3,35 +3,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation_project/modules/contact-us/cubit/states.dart';
 import 'package:graduation_project/modules/feadback_screen/cubit/states.dart';
 
-class FeedBackCubit extends Cubit<FeedBackStates>
+class ContactUsCubit extends Cubit<ContactUsStates>
 {
-  FeedBackCubit() :super(FeedBackInitialState());
+  ContactUsCubit() :super(ContactUsInitialState());
 
-  static FeedBackCubit get (context) => BlocProvider.of(context);
+  static ContactUsCubit get (context) => BlocProvider.of(context);
 
   final TextEditingController controller = TextEditingController();
   final TextEditingController rating = TextEditingController();
 
 
   final GlobalKey<FormState> dialogKey = GlobalKey();
-  void sendFeedback({required message, required rating}){
-    emit(SendFeedBackState());
+  void sendContactUs({required message}){
+    emit(SendContactUsState());
     FirebaseFirestore.instance
-        .collection('feedback')
+        .collection('contact')
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
-      'feedback':message,
-      'rating':rating,
+      'contactUs':message,
       'timestamp':FieldValue.serverTimestamp()
     })
         .then((value){
-      emit(SendFeedBackSuccessState());
+      emit(SendContactUsSuccessState());
     })
         .catchError((error){
       print(error.toString());
-      emit(SendFeedBackErrorState(error.toString()));
+      emit(SendContactUsErrorState(error.toString()));
     });
   }
 }

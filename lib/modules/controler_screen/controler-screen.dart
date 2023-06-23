@@ -205,6 +205,30 @@ class Grscreen extends StatelessWidget {
                           //     ),
                           //   ],
                           // ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Pump water",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30,
+                              ),
+                              Transform.scale(
+                                scale: 1.3,
+                                child: Switch(
+                                  value: cubit.waterPumpValue,
+                                  onChanged: (bool x) {
+                                    cubit.waterPumpSwitch();
+                                  },
+                                  activeColor: HexColor(defaultColor),
+                                ),
+                              ),
+                            ],
+                          ),
                           Column(
                             children: [
                               Material(
@@ -320,30 +344,30 @@ class Grscreen extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Pump water",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  Transform.scale(
-                                    scale: 1.3,
-                                    child: Switch(
-                                      value: cubit.waterPumpValue,
-                                      onChanged: (bool x) {
-                                        cubit.waterPumpSwitch();
-                                      },
-                                      activeColor: HexColor(defaultColor),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Text(
+                              //       "Pump water",
+                              //       style: TextStyle(
+                              //         fontSize: 15,
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 30,
+                              //     ),
+                              //     Transform.scale(
+                              //       scale: 1.3,
+                              //       child: Switch(
+                              //         value: cubit.waterPumpValue,
+                              //         onChanged: (bool x) {
+                              //           cubit.waterPumpSwitch();
+                              //         },
+                              //         activeColor: HexColor(defaultColor),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                             ],
                           ),
 
